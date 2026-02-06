@@ -7,6 +7,7 @@ import { Tooltip, TooltipContent, TooltipTrigger } from "@/components/ui/tooltip
 // Types
 import { type ColumnDef } from "@tanstack/react-table"
 import type { FileProps } from "@/components/Main"
+import { toast } from "sonner"
 
 
 export const columns = (deleteFile: (id: string) => void): ColumnDef<FileProps>[] => [
@@ -73,7 +74,8 @@ export const columns = (deleteFile: (id: string) => void): ColumnDef<FileProps>[
       const variante = class_b[page] as "default" | "destructive" | "warning" | "link" | "success" | "outline" | "secondary" | "ghost" | null | undefined
 
       const del = () => {
-        deleteFile(id)
+        deleteFile(id);
+        toast.success(`Eliminado satisfactoriamente el elemento:\n ${row.original.url}`);
       }
 
       return (
