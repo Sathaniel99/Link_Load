@@ -45,7 +45,7 @@ export const columns = (deleteFile: (id: string) => void): ColumnDef<FileProps>[
         <TooltipTrigger asChild>
           <img
             className="w-10 h-auto object-contain"
-            src={`/${row.original.page}.svg`}
+            src={`/Link_Load/${row.original.page}.svg`}
             alt={row.original.page}
           />
         </TooltipTrigger>

@@ -7,6 +7,7 @@ import { Separator } from "./ui/separator";
 import { Tooltip, TooltipContent, TooltipTrigger } from "./ui/tooltip";
 // Configuraciones
 import { github, instagram, facebook, telegram, whatsapp } from '@/lib/configs'
+import { Avatar, AvatarFallback, AvatarImage } from "./ui/avatar";
 
 export const Footer = () => {
 
@@ -52,7 +53,17 @@ export const Footer = () => {
             </div>
 
             <h1 className="flex items-center gap-1 text-sm text-slate-500">
-                {new Date().getFullYear()} Sathaniel® <Separator orientation={'vertical'} className="h-4 mx-2 bg-slate-700" /> Creado con <IoHeart size={'20'} className="text-red-600 animate-pulse" /> para la comunidad.
+                {new Date().getFullYear()} Sathaniel®
+                <Tooltip>
+                    <TooltipTrigger asChild>
+                        <Avatar className="transform hover:-translate-y-1 transition-all hover:animate-bounce cursor-pointer">
+                            <AvatarImage src="/Link_Load/sathaniel.jpg" />
+                            <AvatarFallback>S</AvatarFallback>
+                        </Avatar>
+                    </TooltipTrigger>
+                    <TooltipContent>Sathaniel</TooltipContent>
+                </Tooltip>
+                <Separator orientation={'vertical'} className="h-4 mx-2 bg-slate-700" /> Creado con <IoHeart size={'20'} className="text-red-600 animate-pulse" /> para la comunidad.
             </h1>
         </footer >
     );
