@@ -8,6 +8,7 @@ import { Tooltip, TooltipContent, TooltipTrigger } from "./ui/tooltip";
 // Configuraciones
 import { github, instagram, facebook, telegram, whatsapp } from '@/lib/configs'
 import { Avatar, AvatarFallback, AvatarImage } from "./ui/avatar";
+import { ModeToggle } from "./mode-toggle";
 
 export const Footer = () => {
 
@@ -27,9 +28,9 @@ export const Footer = () => {
 
             <div className="flex justify-between w-full max-w-5xl ">
 
-                <div className="flex flex-col gap-1">
-                    <h1 className="flex items-center gap-2 text-xl font-semibold"><MdElectricBolt size={30} className="text-primary" /> LinkLoad</h1>
-                    <small className="text-slate-500">Gestor para enlaces de descargas.</small>
+                <div className="flex flex-col gap-1 text-slate-700 dark:text-slate-500">
+                    <h1 className="flex items-center gap-2 text-xl font-semibold sirin-stencil"><MdElectricBolt size={30} className="text-primary" /> LinkLoad <ModeToggle /> </h1>
+                    <small>Gestor para enlaces de descargas.</small>
                 </div>
 
                 {/* Redes sociales */}
@@ -39,7 +40,7 @@ export const Footer = () => {
                             <TooltipTrigger>
                                 <a
                                     href={element.link} target="_blank" rel="noopener noreferrer"
-                                    className={`h-10 w-10 border transition-all transform hover:-translate-y-1 rounded-full flex items-center justify-center border-slate-700 text-white bg-transparent ${element.color}`}
+                                    className={`h-10 w-10 border transition-all transform hover:-translate-y-1 rounded-full flex items-center justify-center border-slate-700 text-slate-700 hover:text-white dark:text-white bg-transparent ${element.color}`}
                                 >
                                     {element.icon}
                                 </a>
@@ -52,7 +53,7 @@ export const Footer = () => {
                 </div>
             </div>
 
-            <h1 className="flex items-center gap-1 text-sm text-slate-500">
+            <h1 className="flex items-center gap-1 text-sm text-slate-700 dark:text-slate-500">
                 {new Date().getFullYear()} Sathaniel®
                 <Tooltip>
                     <TooltipTrigger asChild>

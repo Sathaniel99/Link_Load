@@ -66,7 +66,7 @@ export const Tab_Download = ({ files, onDeleteFile }: Tab_DownloadProps) => {
             {/* Barra de búsqueda y ordenamiento */}
             <div className="mb-4 flex flex-col sm:flex-row gap-3 items-center justify-between">
                 <div className="relative w-full sm:w-auto sm:flex-1 max-w-md">
-                    <IoSearchOutline className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400" />
+                    <IoSearchOutline className="absolute left-3 top-1/2 transform -translate-y-1/2 text-slate-500" />
                     <Input
                         type="text"
                         placeholder="Buscar archivos..."

@@ -44,13 +44,13 @@ export const Main = () => {
 
             <section className='flex flex-col gap-5 py-5'>
                 <div className='flex flex-col items-center gap-2'>
-                    <h1 className='flex items-center text-5xl text-center font-semibold'><MdElectricBolt className='text-primary' /> Link-Load</h1>
-                    <small className='font-semibold text-slate-400'>Gestor de enlaces para ordenamiento automático de descargas</small>
+                    <h1 className='flex items-center text-5xl text-center font-semibold sirin-stencil'><MdElectricBolt className='text-primary' /> Link-Load</h1>
+                    <small className='font-semibold text-slate-700! dark:text-slate-400!'>Gestor de enlaces para ordenamiento automático de descargas</small>
                 </div>
                 <div className='mx-auto'>
                     <h1 className='text-primary text-2xl text-center font-semibold m-0'>{files?.length}</h1>
                     <Separator className='border-t border-slate-600' />
-                    <small className='text-slate-400 font-semibold m-0'>ARCHIVOS</small>
+                    <small className='font-semibold m-0 text-slate-700 dark:text-slate-500'>ARCHIVOS</small>
                 </div>
             </section>
 

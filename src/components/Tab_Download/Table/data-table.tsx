@@ -77,8 +77,8 @@ export function DataTable<TData, TValue>({ columns, data }: DataTableProps<TData
         <div className="space-y-4">
             <Card className="p-0 border-slate-700! overflow-hidden">
                 <div className="overflow-hidden rounded-md">
-                    <Table className="">
-                        <TableHeader className="bg-slate-800">
+                    <Table>
+                        <TableHeader>
                             {table.getHeaderGroups().map((headerGroup) => (
                                 <TableRow key={headerGroup.id}>
                                     {headerGroup.headers.map((header) => {
@@ -128,7 +128,7 @@ export function DataTable<TData, TValue>({ columns, data }: DataTableProps<TData
             {data.length > 0 && (
                 <div className="flex items-center justify-between">
                     {/* Información de página actual */}
-                    <div className="text-sm text-slate-400">
+                    <div className="text-sm text-slate-700 dark:text-slate-500">
                         {totalPages > 1 ? (
                             <>
                                 Mostrando {table.getState().pagination.pageIndex * table.getState().pagination.pageSize + 1}-
@@ -192,7 +192,7 @@ export function DataTable<TData, TValue>({ columns, data }: DataTableProps<TData
 
                     {/* Selector de tamaño de página */}
                     <div className="flex items-center gap-2">
-                        <span className="text-sm text-slate-400">Mostrar:</span>
+                        <span className="text-sm text-slate-700 dark:text-slate-500">Mostrar:</span>
                         <Select
                             value={table.getState().pagination.pageSize.toString()}
                             onValueChange={(value) => {
@@ -204,7 +204,7 @@ export function DataTable<TData, TValue>({ columns, data }: DataTableProps<TData
                             </SelectTrigger>
                             <SelectContent>
                                 <SelectGroup>
-                                    <SelectLabel>Cant. elementos</SelectLabel>
+                                    <SelectLabel className="text-center">Cant. elementos</SelectLabel>
                                     {[8, 16, 24, 32].map(pageSize => (
                                         <SelectItem key={pageSize} value={pageSize.toString()}>
                                             {pageSize}

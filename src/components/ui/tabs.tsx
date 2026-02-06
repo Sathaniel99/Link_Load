@@ -25,7 +25,7 @@ function Tabs({
 }
 
 const tabsListVariants = cva(
-  "inline-flex w-fit items-center justify-center border !border-slate-600/50 rounded-xl",
+  "inline-flex w-fit items-center justify-center border border-slate-500! dark:border-slate-700! rounded-xl",
   {
     variants: {
       variant: {
@@ -71,7 +71,7 @@ function TabsTrigger({
         
         // Estilos activos
         "data-[state=active]:text-blue-500",
-        "data-[state=active]:bg-slate-700/90 rounded-lg",
+        "data-[state=active]:bg-slate-200/90 dark:data-[state=active]:bg-slate-700/90 rounded-lg",
         
         // Estilos para variante línea
         "tabs-list:border-b-2 tabs-list:border-transparent",
