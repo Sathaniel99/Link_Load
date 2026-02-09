@@ -11,6 +11,7 @@ import { Tab_Converter } from './Tab_Converter/Tab_Converter';
 import { Tab_Download } from './Tab_Download/Tab_Download';
 // Utiles
 import { convertToCustomFormat } from './Tab_Converter/utils/linkConverter';
+import { toast } from 'sonner';
 
 export interface FileProps {
     url: string;
@@ -30,6 +31,7 @@ export const Main = () => {
             id: `${Date.now()}-${index}-${Math.random().toString(36).substr(2, 9)}`
         }));
         setFiles(files => [...files, ...filesWithId]);
+        toast.success(`${new_files.length} elementos cargados.`);
     }
 
     // Eliminar archivos o enlaces
@@ -45,7 +47,7 @@ export const Main = () => {
             <section className='flex flex-col gap-5 py-5'>
                 <div className='flex flex-col items-center gap-2'>
                     <h1 className='flex items-center text-5xl text-center font-semibold sirin-stencil'><MdElectricBolt className='text-primary' /> Link-Load</h1>
-                    <small className='font-semibold text-slate-700! dark:text-slate-400!'>Gestor de enlaces para ordenamiento automático de descargas</small>
+                    <small className='font-semibold text-slate-700 dark:text-slate-400'>Gestor de enlaces para ordenamiento automático de descargas</small>
                 </div>
                 <div className='mx-auto'>
                     <h1 className='text-primary text-2xl text-center font-semibold m-0'>{files?.length}</h1>

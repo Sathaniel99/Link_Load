@@ -48,6 +48,7 @@ export const columns = (deleteFile: (id: string) => void): ColumnDef<FileProps>[
             className="w-10 h-auto object-contain"
             src={`/Link_Load/${row.original.page}.svg`}
             alt={row.original.page}
+            loading="lazy"
           />
         </TooltipTrigger>
         <TooltipContent>
