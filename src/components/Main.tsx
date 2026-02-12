@@ -12,6 +12,7 @@ import { Tab_Download } from './Tab_Download/Tab_Download';
 // Utiles
 import { convertToCustomFormat } from './Tab_Converter/utils/linkConverter';
 import { toast } from 'sonner';
+import { useTranslations } from '@/context/useLanguaje';
 
 export interface FileProps {
     url: string;
@@ -21,6 +22,7 @@ export interface FileProps {
 
 export const Main = () => {
     const [files, setFiles] = useState<FileProps[]>([]);
+    const {t} = useTranslations()
 
     // Manejo de los archivos o enlaces
     const handledFiles = (texto: string) => {
@@ -47,12 +49,12 @@ export const Main = () => {
             <section className='flex flex-col gap-5 py-5'>
                 <div className='flex flex-col items-center gap-2'>
                     <h1 className='flex items-center text-5xl text-center font-semibold sirin-stencil'><MdElectricBolt className='text-primary' /> Link-Load</h1>
-                    <small className='font-semibold text-slate-700 dark:text-slate-400'>Gestor de enlaces para ordenamiento automático de descargas</small>
+                    <small className='font-semibold text-slate-700 dark:text-slate-400'>{t('main_subtitle')}</small>
                 </div>
                 <div className='mx-auto'>
                     <h1 className='text-primary text-2xl text-center font-semibold m-0'>{files?.length}</h1>
                     <Separator className='border-t border-slate-600' />
-                    <small className='font-semibold m-0 text-slate-700 dark:text-slate-500'>ARCHIVOS</small>
+                    <small className='font-semibold m-0 text-slate-700 dark:text-slate-500'>{t('main_files')}</small>
                 </div>
             </section>
 
@@ -61,8 +63,8 @@ export const Main = () => {
                 <Tabs defaultValue="download" className="w-full">
 
                     <TabsList className='mx-auto'>
-                        <TabsTrigger className='gap-1' value="download"><FaCloudDownloadAlt /> Descargas</TabsTrigger>
-                        <TabsTrigger className='gap-1' value="converter"><LuWandSparkles /> Convertidor</TabsTrigger>
+                        <TabsTrigger className='gap-1' value="download"><FaCloudDownloadAlt /> {t('main_tab1')}</TabsTrigger>
+                        <TabsTrigger className='gap-1' value="converter"><LuWandSparkles /> {t('main_tab2')}</TabsTrigger>
                     </TabsList>
 
                     <TabsContent className='min-h-155 m-0' value="download">

@@ -12,8 +12,9 @@ import { Input } from "../ui/input";
 import { Button } from "../ui/button";
 import { Tooltip, TooltipContent, TooltipTrigger } from "../ui/tooltip";
 // Componentes del Data-Table
-import { columns } from "./Table/columns"
+import { useColumns } from "./Table/columns" // ✅ Importas el hook
 import { DataTable } from "./Table/data-table"
+import { useLanguage } from "@/context/useLanguaje";
 
 interface Tab_DownloadProps {
     files: FileProps[];
@@ -23,6 +24,10 @@ interface Tab_DownloadProps {
 export const Tab_Download = ({ files, onDeleteFile }: Tab_DownloadProps) => {
     const [searchTerm, setSearchTerm] = useState("");
     const [sortAscending, setSortAscending] = useState(true);
+    const { t } = useLanguage()
+
+    // ✅ Usas el hook aquí
+    const columns = useColumns(onDeleteFile);
 
     const files_length = files.length;
 
@@ -54,11 +59,11 @@ export const Tab_Download = ({ files, onDeleteFile }: Tab_DownloadProps) => {
                 <CardHeader className="">
                     <CardTitle className="flex items-center gap-2 text-base sm:text-lg">
                         <MdInfoOutline size={'32'} className="text-blue-600 bg-blue-600/20 p-2 rounded-xl sm:size-10" />
-                        Gestor de descargas
+                        {t('tb_title')}
                     </CardTitle>
 
                     <CardDescription className="text-sm sm:text-base">
-                        {files_length > 0 ? `Hay ${files_length} archivo${files_length > 1 && 's'} listo${files_length > 1 && 's'} para procesar.` : `No hay archivos aún.`}
+                        {files_length > 0 ? `${t('tb_subtitle_many_part1')} ${files_length > 1 ? t('tb_subtitle_many_part2_if2') : t('tb_subtitle_many_part2_if1')} ${files_length} ${t('tb_subtitle_many_part3')}${files_length > 1 && 's'} ${t('tb_subtitle_many_part4')}.` : t('tb_subtitle_else')}
                     </CardDescription>
                 </CardHeader>
             </Card>
@@ -69,7 +74,7 @@ export const Tab_Download = ({ files, onDeleteFile }: Tab_DownloadProps) => {
                     <IoSearchOutline className="absolute left-3 top-1/2 transform -translate-y-1/2 text-slate-500" />
                     <Input
                         type="text"
-                        placeholder="Buscar archivos..."
+                        placeholder={`${t('tb_search_input')}...`}
                         value={searchTerm}
                         onChange={(e) => setSearchTerm(e.target.value)}
                         className="pl-10 w-full"
@@ -106,13 +111,14 @@ export const Tab_Download = ({ files, onDeleteFile }: Tab_DownloadProps) => {
                             </Button>
                         </TooltipTrigger>
                         <TooltipContent>
-                            {sortAscending ? "Ordenar A-Z" : "Ordenar Z-A"}
+                            {sortAscending ? t('tb_sort_button_up') : t('tb_sort_button_down')}
                         </TooltipContent>
                     </Tooltip>
                 </div>
             </div>
 
-            <DataTable columns={columns(onDeleteFile)} data={sortedFiles} />
+            {/* ✅ Pasas las columns directamente (ya no es función) */}
+            <DataTable columns={columns} data={sortedFiles} />
         </div>
     )
 }

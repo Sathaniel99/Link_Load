@@ -7,19 +7,19 @@ import { Button } from "@/components/ui/button"
 import { Pagination, PaginationContent, PaginationEllipsis, PaginationItem, PaginationLink, PaginationNext, PaginationPrevious } from "@/components/ui/pagination"
 import { Select, SelectContent, SelectGroup, SelectItem, SelectLabel, SelectTrigger, SelectValue } from "@/components/ui/select"
 import { type ColumnDef, flexRender, getCoreRowModel, getPaginationRowModel, useReactTable } from "@tanstack/react-table"
+import { useTranslations } from "@/context/useLanguaje"
 
 interface DataTableProps<TData, TValue> {
-    columns: ColumnDef<TData, TValue>[] | (() => ColumnDef<TData, TValue>[])
+    columns: ColumnDef<TData, TValue>[]
     data: TData[]
 }
 
 export function DataTable<TData, TValue>({ columns, data }: DataTableProps<TData, TValue>) {
-
-    const resolvedColumns = typeof columns === 'function' ? columns() : columns;
+    const {t} = useTranslations()
 
     const table = useReactTable({
         data,
-        columns: resolvedColumns,
+        columns,
         getCoreRowModel: getCoreRowModel(),
         getPaginationRowModel: getPaginationRowModel(),
         initialState: {
@@ -112,9 +112,9 @@ export function DataTable<TData, TValue>({ columns, data }: DataTableProps<TData
                                 ))
                             ) : (
                                 <TableRow>
-                                    <TableCell colSpan={resolvedColumns.length} className="h-24 text-center">
+                                    <TableCell colSpan={columns.length} className="h-24 text-center">
                                         <span className="flex gap-1 justify-center items-center">
-                                            <ImSpinner2 className="animate-spin text-blue-700 size-6" /> No hay resultados a mostrar.
+                                            <ImSpinner2 className="animate-spin text-blue-700 size-6" /> {t('dt_no_files')}.
                                         </span>
                                     </TableCell>
                                 </TableRow>
@@ -126,9 +126,9 @@ export function DataTable<TData, TValue>({ columns, data }: DataTableProps<TData
 
             {/* Mostrar siempre la información y controles de paginación si hay datos */}
             {data.length > 0 && (
-                <div className="flex items-center justify-between">
+                <div className="flex flex-col sm:flex-row items-center justify-between gap-4">
                     {/* Información de página actual */}
-                    <div className="text-sm text-slate-700 dark:text-slate-500">
+                    <div className="text-sm text-slate-700 dark:text-slate-500 order-2 sm:order-1">
                         {totalPages > 1 ? (
                             <>
                                 Mostrando {table.getState().pagination.pageIndex * table.getState().pagination.pageSize + 1}-
@@ -141,7 +141,7 @@ export function DataTable<TData, TValue>({ columns, data }: DataTableProps<TData
 
                     {/* Controles de paginación */}
                     {totalPages > 1 ? (
-                        <Pagination>
+                        <Pagination className="order-1 sm:order-2">
                             <PaginationContent>
                                 {/* Botón Anterior */}
                                 <PaginationItem>
@@ -165,6 +165,7 @@ export function DataTable<TData, TValue>({ columns, data }: DataTableProps<TData
                                             <PaginationLink
                                                 onClick={() => table.setPageIndex(pageNumber - 1)}
                                                 isActive={currentPage === pageNumber}
+                                                className="cursor-pointer"
                                             >
                                                 {pageNumber}
                                             </PaginationLink>
@@ -187,26 +188,26 @@ export function DataTable<TData, TValue>({ columns, data }: DataTableProps<TData
                             </PaginationContent>
                         </Pagination>
                     ) : (
-                        <div className="w-0 flex-1"></div>
+                        <div className="w-0 flex-1 order-1 sm:order-2"></div>
                     )}
 
                     {/* Selector de tamaño de página */}
-                    <div className="flex items-center gap-2">
-                        <span className="text-sm text-slate-700 dark:text-slate-500">Mostrar:</span>
+                    <div className="flex items-center gap-2 order-3">
+                        <span className="text-sm text-slate-700 dark:text-slate-500 hidden sm:inline">Mostrar:</span>
                         <Select
                             value={table.getState().pagination.pageSize.toString()}
                             onValueChange={(value) => {
                                 table.setPageSize(Number(value))
                             }}
                         >
-                            <SelectTrigger className="w-full max-w-48 transition-all">
+                            <SelectTrigger className="w-full sm:w-32 transition-all h-9 text-sm">
                                 <SelectValue placeholder="Cant. elementos" />
                             </SelectTrigger>
                             <SelectContent>
                                 <SelectGroup>
-                                    <SelectLabel className="text-center">Cant. elementos</SelectLabel>
+                                    <SelectLabel className="text-center text-xs sm:text-sm">Cant. elementos</SelectLabel>
                                     {[8, 16, 24, 32].map(pageSize => (
-                                        <SelectItem key={pageSize} value={pageSize.toString()}>
+                                        <SelectItem key={pageSize} value={pageSize.toString()} className="text-xs sm:text-sm">
                                             {pageSize}
                                         </SelectItem>
                                     ))}

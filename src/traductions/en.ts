@@ -1,0 +1,96 @@
+export const lang = {
+    // Main
+    main_subtitle: "Link manager for automatic download sorting",
+    main_files: "FILES",
+    main_tab1: "Downloads",
+    main_tab2: "Converter",
+
+    // Tab_Downloads.tsx
+    tb_title: "Download manager",
+    tb_subtitle_many_part1: "There",
+    tb_subtitle_many_part2_if1: "is",
+    tb_subtitle_many_part2_if2: "are",
+    tb_subtitle_many_part3: "link",
+    tb_subtitle_many_part4: "ready",
+    tb_subtitle_else: "No files yet.",
+
+    tb_search_input: "Search files",
+    tb_sort_button_up: "Sort A-Z",
+    tb_sort_button_down: "Sort Z-A",
+
+    // Data-tables
+    dt_id: "ID",
+    dt_name: "FILE NAME",
+    dt_origen: "ORIGIN",
+    dt_actions: "ACTIONS",
+    dt_tt_1: "Delete link",
+    dt_tt_2: "Go to",
+    dt_tt_3: "WEB",
+
+    dt_toast_1: "Successfully removed the item:",
+
+    dt_no_files: "There are no results to show",
+
+    // Tab_Converter
+    tc_title: "Smart Converter",
+    tc_subtitle: "Automatically extract and sort download links.",
+
+    tc_checkbox: "Link Converter",
+    tc_checkbox_tooltip: "This option allows you to convert links and organize them in JSON format.",
+
+    tc_textarea1_tooltip: "Import '.txt' file",
+    tc_textarea1_label_legend: "TEXT INPUT",
+    tc_textarea1_placeholder: "Paste your MediaFire or MEGA links here",
+
+    tc_textarea2_tooltip: "Download array",
+    tc_textarea2_label_legend: "GENERATED ARRAY",
+    tc_textarea2_placeholder: "The JSON array will appear here",
+
+    tc_footer_btn1_text: "Load to Downloads",
+    tc_footer_btn2_text: "Convert to Array",
+    tc_footer_btn3_text: "Clear All",
+    tc_footer_btn4_text: "Copy Result",
+
+    tc_toast_1: "Text cleaned successfully.",
+    tc_toast_2: "Text copied to clipboard.",
+    tc_toast_3: "Error copying:",
+    tc_toast_4: "No content to copy",
+    tc_toast_5: "Error: Textareas not available",
+    tc_toast_6: "No text to convert",
+    tc_toast_7: "links converted",
+    tc_toast_8: "Error converting links",
+    tc_toast_9: "Error processing links",
+    tc_toast_10: "No items",
+    tc_toast_11: "No file selected",
+    tc_toast_12: "File is empty",
+    tc_toast_13_part1: "JSON array loaded",
+    tc_toast_13_part2: "items",
+    tc_toast_14_part1: "JSON object loaded",
+    tc_toast_14_part2: "links",
+    tc_toast_15: "JSON loaded",
+
+    tc_toast_16_part1: "TXT file loaded",
+    tc_toast_16_part2: "lines",
+
+    tc_toast_17: "Error: Textarea not available",
+    tc_toast_18: "Error reading file",
+    tc_toast_19: "Error processing file",
+    tc_toast_20: "Array is empty",
+    tc_toast_21: "Array downloaded as JSON",
+    tc_toast_22: "JSON object downloaded",
+    tc_toast_23: "No valid content to download",
+    tc_toast_24: "links converted to JSON and downloaded",
+    tc_toast_25: "Error downloading JSON",
+    tc_toast_26: "Error downloading file",
+
+    // Footer
+    footer_subtitle: "Download link manager.",
+    footer_text_part1: "Created with",
+    footer_text_part2: "for the community.",
+
+    // Change Lang
+    ct_label: "Toggle theme",
+    ct_light: "Light",
+    ct_dark: "Dark",
+    ct_system: "System",
+}

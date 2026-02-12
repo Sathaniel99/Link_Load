@@ -1,0 +1,96 @@
+export const lang = {
+    // Main
+    main_subtitle: "Gestor de enlaces para ordenamiento automático de descargas",
+    main_files: "ARCHIVOS",
+    main_tab1: "Descargas",
+    main_tab2: "Convertidor",
+
+    // Tab_Downloads.tsx
+    tb_title: "Gestor de descargas",
+    tb_subtitle_many_part1: "Hay",
+    tb_subtitle_many_part2_if1: "",
+    tb_subtitle_many_part2_if2: "",
+    tb_subtitle_many_part3: "enlace",
+    tb_subtitle_many_part4: "listo",
+    tb_subtitle_else: "No hay archivos aún.",
+
+    tb_search_input: "Buscar archivos",
+    tb_sort_button_up: "Ordenar A-Z",
+    tb_sort_button_down: "Ordenar Z-A",
+
+    // Data-tables
+    dt_id: "ID",
+    dt_name: "NOMBRE DEL ARCHIVO",
+    dt_origen: "ORIGEN",
+    dt_actions: "ACCIONES",
+    dt_tt_1: "Eliminar enlace",
+    dt_tt_2: "Ir a",
+    dt_tt_3: "la WEB",
+
+    dt_toast_1: "Eliminado satisfactoriamente el elemento:",
+
+    dt_no_files: "No hay resultados a mostrar",
+
+    // Tab_Converter
+    tc_title: "Conversor Inteligente",
+    tc_subtitle: "Extrae y ordena automáticamente enlaces de descarga.",
+
+    tc_checkbox: "Conversor de enlaces",
+    tc_checkbox_tooltip: "Esta opción te permite convertir los enlaces y organizarlos en formato JSON.",
+
+    tc_textarea1_tooltip: "Importar archivo '.txt'",
+    tc_textarea1_label_legend: "ENTRADA DE TEXTO",
+    tc_textarea1_placeholder: "Pega aquí tus enlaces de MediaFire o MEGA",
+
+    tc_textarea2_tooltip: "Descargar array",
+    tc_textarea2_label_legend: "ARRAY GENERADO",
+    tc_textarea2_placeholder: "El array JSON aparecerá aquí",
+
+    tc_footer_btn1_text: "Cargar a Descargas",
+    tc_footer_btn2_text: "Convertir a Array",
+    tc_footer_btn3_text: "Limpiar todo",
+    tc_footer_btn4_text: "Copiar Resultado",
+
+    tc_toast_1: "Limpieza del texto realizada.",
+    tc_toast_2: "Texto copiado al portapapeles.",
+    tc_toast_3: "Error al copiar:",
+    tc_toast_4: "No hay contenido para copiar",
+    tc_toast_5: "Error: Textareas no disponibles",
+    tc_toast_6: "No hay texto para convertir",
+    tc_toast_7: "enlaces convertidos",
+    tc_toast_8: "Error al convertir enlaces",
+    tc_toast_9: "Error al procesar los enlaces",
+    tc_toast_10: "No hay elementos",
+    tc_toast_11: "No se seleccionó ningún archivo",
+    tc_toast_12: "El archivo está vacío",
+    tc_toast_13_part1: "JSON array cargado",
+    tc_toast_13_part2: "elementos",
+    tc_toast_14_part1: "JSON objeto cargado",
+    tc_toast_14_part2: "enlaces",
+    tc_toast_15: "JSON cargado",
+
+    tc_toast_16_part1 : "Archivo TXT cargado",
+    tc_toast_16_part2 : "líneas",
+
+    tc_toast_17: "Error: Textarea no disponible",
+    tc_toast_18: "Error al leer el archivo",
+    tc_toast_19: "Error al procesar el archivo",
+    tc_toast_20: "El array está vacío",
+    tc_toast_21: "Array descargado como JSON",
+    tc_toast_22: "Objeto JSON descargado",
+    tc_toast_23: "No hay contenido válido para descargar",
+    tc_toast_24: "enlaces convertidos a JSON y descargados",
+    tc_toast_25: "Error al descargar el JSON",
+    tc_toast_26: "Error al descargar el archivo",
+
+    // Footer
+    footer_subtitle: "Gestor para enlaces de descargas.",
+    footer_text_part1: "Creado con",
+    footer_text_part2: "para la comunidad.",
+
+    // Change theme
+    ct_label: "Cambiar tema",
+    ct_light: "Claro",
+    ct_dark: "Oscuro",
+    ct_system: "Sistema",
+}

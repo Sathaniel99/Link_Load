@@ -19,11 +19,13 @@ import { useRef, useState, forwardRef } from "react";
 import { toast } from "sonner";
 // Utiles
 import { processDownloadLinks } from "./utils/linkConverter";
+import { useTranslations } from "@/context/useLanguaje"
 
 export const Tab_Converter = ({ handled_void }: { handled_void: (arg: string) => void }) => {
     const [convert, setConvert] = useState<boolean>(false)
     const input_textarea = useRef<HTMLTextAreaElement>(null)
     const array_textarea = useRef<HTMLTextAreaElement>(null)
+    const {t} = useTranslations()
 
     // Limpiar los dos textareas
     const handledClean_All = () => {
@@ -34,7 +36,7 @@ export const Tab_Converter = ({ handled_void }: { handled_void: (arg: string) =>
             array_textarea.current.value = "";
         }
 
-        toast.success(`Limpieza del texto realizada.`)
+        toast.success(t('tc_toast_1'))
     }
 
     // Copiar el texto del segundo textarea
@@ -44,14 +46,14 @@ export const Tab_Converter = ({ handled_void }: { handled_void: (arg: string) =>
             if (textToCopy) {
                 navigator.clipboard.writeText(textToCopy)
                     .then(() => {
-                        toast.success(`Texto copiado al portapapeles.`);
+                        toast.success(t('tc_toast_2'));
                     })
                     .catch(err => {
-                        console.error("Error al copiar:", err);
-                        toast.error(`Error al copiar: ${err.message}`);
+                        console.error(t('tc_toast_3'), err);
+                        toast.error(`${t('tc_toast_3')} ${err.message}`);
                     });
             } else {
-                toast.warning("No hay contenido para copiar");
+                toast.warning(t('tc_toast_4'));
             }
         }
     };
@@ -59,14 +61,14 @@ export const Tab_Converter = ({ handled_void }: { handled_void: (arg: string) =>
     // Convertir a array
     const HandledTransform_to_Array = () => {
         if (!input_textarea.current || !array_textarea.current) {
-            toast.error("Error: Textareas no disponibles");
+            toast.error(t('tc_toast_5'));
             return;
         }
 
         const texto = input_textarea.current.value;
 
         if (!texto.trim()) {
-            toast.warning("No hay texto para convertir");
+            toast.warning(t('tc_toast_6'));
             return;
         }
 
@@ -79,7 +81,7 @@ export const Tab_Converter = ({ handled_void }: { handled_void: (arg: string) =>
 
             // Mostrar resumen en un toast
             const { summary } = resultado;
-            let mensaje = `${summary.total} enlaces convertidos`;
+            let mensaje = `${summary.total} ${t('tc_toast_7')}`;
 
             if (summary.mediafire > 0) {
                 mensaje += ` (${summary.mediafire} MediaFire)`;
@@ -94,8 +96,8 @@ export const Tab_Converter = ({ handled_void }: { handled_void: (arg: string) =>
             toast.success(mensaje);
 
         } catch (error) {
-            console.error("Error al convertir enlaces:", error);
-            toast.error("Error al procesar los enlaces");
+            console.error(t('tc_toast_8'), error);
+            toast.error(t('tc_toast_9'));
         }
     };
 
@@ -105,7 +107,7 @@ export const Tab_Converter = ({ handled_void }: { handled_void: (arg: string) =>
             handled_void(input_textarea.current.value)
             return;
         }
-        toast.error("No hay elementos.");
+        toast.error(t('tc_toast_10'));
     }
 
     // Importar un txt y parsearlo para obtener el texto en formato: enlace1\nenlace2\nenlace3
@@ -120,7 +122,7 @@ export const Tab_Converter = ({ handled_void }: { handled_void: (arg: string) =>
             const file = target.files?.[0];
 
             if (!file) {
-                toast.warning("No se seleccionó ningún archivo");
+                toast.warning(t('tc_toast_11'));
                 return;
             }
 
@@ -131,7 +133,7 @@ export const Tab_Converter = ({ handled_void }: { handled_void: (arg: string) =>
                     const content = e.target?.result as string;
 
                     if (!content) {
-                        toast.error("El archivo está vacío");
+                        toast.error(t('tc_toast_12'));
                         return;
                     }
 
@@ -152,7 +154,7 @@ export const Tab_Converter = ({ handled_void }: { handled_void: (arg: string) =>
                                     typeof item === 'string' && item.trim().length > 0
                                 )
                                 .map((item: string) => item.trim());
-                            message = `JSON array cargado: ${file.name} (${linksArray.length} elementos)`;
+                            message = `${t('tc_toast_13_part1')}: ${file.name} (${linksArray.length} ${t('tc_toast_13_part2')})`;
                         } else if (typeof parsed === 'object' && parsed !== null) {
                             // Si es objeto JSON (no array), extraer valores
                             const values: unknown[] = Object.values(parsed);
@@ -161,11 +163,11 @@ export const Tab_Converter = ({ handled_void }: { handled_void: (arg: string) =>
                                     typeof item === 'string' && item.trim().length > 0
                                 )
                                 .map((item: string) => item.trim());
-                            message = `JSON objeto cargado: ${file.name} (${linksArray.length} enlaces)`;
+                            message = `${t('tc_toast_14_part1')}: ${file.name} (${linksArray.length} ${t('tc_toast_14_part2')})`;
                         } else {
                             // Si es otro tipo (string, number, etc.)
                             linksArray = [cleanedContent];
-                            message = `JSON cargado: ${file.name}`;
+                            message = `${t('tc_toast_15')}: ${file.name}`;
                         }
                     } catch {
                         // Si no es JSON válido, procesar como texto plano
@@ -174,7 +176,7 @@ export const Tab_Converter = ({ handled_void }: { handled_void: (arg: string) =>
                             .split('\n')
                             .map(line => line.trim())
                             .filter(line => line.length > 0);
-                        message = `Archivo TXT cargado: ${file.name} (${linksArray.length} líneas)`;
+                        message = `${t('tc_toast_16_part1')}: ${file.name} (${linksArray.length} ${t('tc_toast_16_part2')})`;
                     }
 
                     // Convertir a formato de enlace sobre enlace
@@ -185,17 +187,17 @@ export const Tab_Converter = ({ handled_void }: { handled_void: (arg: string) =>
                         input_textarea.current.value = formattedContent;
                         toast.success(message);
                     } else {
-                        toast.error("Error: Textarea no disponible");
+                        toast.error(t('tc_toast_17'));
                     }
 
                 } catch (error) {
-                    console.error("Error al leer el archivo:", error);
-                    toast.error("Error al procesar el archivo");
+                    console.error(t('tc_toast_18'), error);
+                    toast.error(t('tc_toast_19'));
                 }
             };
 
             reader.onerror = () => {
-                toast.error("Error al leer el archivo");
+                toast.error(t('tc_toast_20'));
             };
 
             reader.readAsText(file);
@@ -214,7 +216,7 @@ export const Tab_Converter = ({ handled_void }: { handled_void: (arg: string) =>
         const content = array_textarea.current.value.trim();
 
         if (!content) {
-            toast.warning("El array está vacío");
+            toast.warning(t('tc_toast_20'));
             return;
         }
 
@@ -228,12 +230,12 @@ export const Tab_Converter = ({ handled_void }: { handled_void: (arg: string) =>
                     // Formatear como JSON bonito
                     const jsonContent = JSON.stringify(parsed, null, 2);
                     downloadJsonFile(jsonContent, "enlaces_array.json");
-                    toast.success(`Array descargado como JSON (${parsed.length} elementos)`);
+                    toast.success(`${t('tc_toast_21')} (${parsed.length} ${t('tc_toast_13_part2')})`);
                 } else {
                     // Si es objeto pero no array, también descargar como JSON
                     const jsonContent = JSON.stringify(parsed, null, 2);
                     downloadJsonFile(jsonContent, "enlaces.json");
-                    toast.success("Objeto JSON descargado");
+                    toast.success(t('tc_toast_22'));
                 }
             } catch {
                 // Si no es JSON válido, crear un array con el contenido
@@ -243,7 +245,7 @@ export const Tab_Converter = ({ handled_void }: { handled_void: (arg: string) =>
                     .filter(line => line.length > 0);
 
                 if (lines.length === 0) {
-                    toast.error("No hay contenido válido para descargar");
+                    toast.error(t('tc_toast_23'));
                     return;
                 }
 
@@ -251,12 +253,12 @@ export const Tab_Converter = ({ handled_void }: { handled_void: (arg: string) =>
 
                 downloadJsonFile(jsonArray, "Enlaces.json");
 
-                toast.success(`${lines.length} enlaces convertidos a JSON y descargados`);
+                toast.success(`${lines.length} ${t('tc_toast_24')}`);
             }
 
         } catch (error) {
-            console.error("Error al descargar el JSON:", error);
-            toast.error("Error al descargar el archivo");
+            console.error(t('tc_toast_25'), error);
+            toast.error(t('tc_toast_26'));
         }
     }
 
@@ -292,25 +294,25 @@ export const Tab_Converter = ({ handled_void }: { handled_void: (arg: string) =>
                                         onCheckedChange={(checked) => setConvert(checked === true)}
                                     />
                                     <FieldContent className="text-sm! sm:text-base m-0 ml-2">
-                                        Conversor de enlaces
+                                        {t('tc_checkbox')}
                                     </FieldContent>
                                 </Field>
 
                             </FieldLabel>
                         </TooltipTrigger>
                         <TooltipContent>
-                            Esta opción te permite convertir los enlaces y organizarlos en formato JSON.
+                            {t('tc_checkbox_tooltip')}
                         </TooltipContent>
                     </Tooltip>
                 </CardAction>
 
                 <CardTitle className="flex items-center gap-2 text-base sm:text-lg">
                     <SiGnubash size={'32'} className="text-blue-600 bg-blue-600/20 p-2 rounded-xl sm:size-10" />
-                    Conversor Inteligente
+                    {t('tc_title')}
                 </CardTitle>
 
                 <CardDescription className="text-sm sm:text-base">
-                    Extrae y ordena automáticamente enlaces de descarga.
+                    {t('tc_subtitle')}
                 </CardDescription>
             </CardHeader>
 
@@ -320,11 +322,11 @@ export const Tab_Converter = ({ handled_void }: { handled_void: (arg: string) =>
                     <TextAreas
                         handled={HandledImport_File}
                         icon_button={<IoDocumentTextOutline />}
-                        textTooltip='Importar archivo ".txt"'
-                        label_Legend="ENTRADA DE TEXTO"
+                        textTooltip={t('tc_textarea1_tooltip')}
+                        label_Legend={t('tc_textarea1_label_legend')}
                         ref={input_textarea}
                         readOnly={false}
-                        placeholder="Pega aquí tus enlaces de MediaFire o MEGA..."
+                        placeholder={`${t('tc_textarea1_placeholder')}...`}
                     />
 
                     {/* Panel Derecha */}
@@ -332,11 +334,11 @@ export const Tab_Converter = ({ handled_void }: { handled_void: (arg: string) =>
                         <TextAreas
                             handled={HandledDownload_Array}
                             icon_button={<LuDownload />}
-                            textTooltip="Descargar array"
-                            label_Legend="ARRAY GENERADO"
+                            textTooltip={t('tc_textarea2_tooltip')}
+                            label_Legend={t('tc_textarea2_label_legend')}
                             ref={array_textarea}
                             readOnly={true}
-                            placeholder="El array JSON aparecerá aquí..."
+                            placeholder={`${t('tc_textarea2_placeholder')}...`}
                         />
                     }
                 </FieldGroup>
@@ -349,11 +351,11 @@ export const Tab_Converter = ({ handled_void }: { handled_void: (arg: string) =>
                     variant1="default"
                     handled1={HandledLoad_to_Download}
                     icon1={<RiFolderUploadFill />}
-                    text1="Cargar a Descargas"
+                    text1={t('tc_footer_btn1_text')}
                     variant2="success"
                     handled2={HandledTransform_to_Array}
                     icon2={<LuWandSparkles />}
-                    text2="Convertir a Array"
+                    text2={t('tc_footer_btn2_text')}
                 />
 
                 <Separator orientation="horizontal" className="sm:hidden my-2" />
@@ -364,11 +366,11 @@ export const Tab_Converter = ({ handled_void }: { handled_void: (arg: string) =>
                     variant1="destructive"
                     handled1={handledClean_All}
                     icon1={<MdDelete />}
-                    text1="Limpiar todo"
+                    text1={t('tc_footer_btn3_text')}
                     variant2="ghost"
                     handled2={HandledCopy}
                     icon2={<FaCopy />}
-                    text2="Copiar Resultado"
+                    text2={t('tc_footer_btn4_text')}
                 />
             </CardFooter>
         </Card>
